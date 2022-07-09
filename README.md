@@ -2,7 +2,7 @@
 - 통합 영화 정보 페이지 프로젝트
 - Next.js 찍어 먹어보기
 
-<img src="../box-office/styles/images/view.png" width="300px" height="300px" title="Github_Logo"/>
+<img src="../next-box-office/styles/images/view.png" width="300px" height="300px" title="Github_Logo"/>
 
 
 
