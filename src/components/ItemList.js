@@ -38,7 +38,7 @@ const ItemList = ({ list, identifier = "daily" }) => {
             </thead>
             <tbody>
                 {lists ? lists.map((item, index) => (
-                    <tr className={styles.contents} key={index} onClick={() => router.push(`/view/movie/${item.movieCd}?movie_Nm=${text.removeSpace(item.movieNm)}`)}>
+                    <tr className={styles.contents} key={index} onClick={() => router.push(`/view/movie/${item.movieCd}?movie_Nm=${text.removeSpace(item.movieNm)}`)} style={{cursor: "pointer"}}>
                         <td >{item.rank}</td>
                         <td >{item.movieNm}</td>
                         <td>{item.rankOldAndNew}</td>
