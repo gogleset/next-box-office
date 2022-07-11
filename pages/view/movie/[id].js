@@ -5,6 +5,7 @@ import axios from 'axios'
 import config from "../../../src/server/config"
 import Image from "next/image"
 import { getAvg } from "../../../src/data/Calculator"
+import Head from "next/head"
 
 // style
 import styles from "../../../styles/movie_detail.module.scss";
@@ -20,6 +21,10 @@ import DoughnutChart from "../../../src/components/DoughnutChart";
 
 const Id = ({ posts }) => {
     console.log(posts);
+    <Head>
+        <title>{posts.searchData.items[0].title}</title>
+        <meta name={posts.searchData.items[0].title} content={"영화 상세 정보 " +posts.searchData.items[0].title} />
+    </Head>
 
 
     return <div className={styles.container}>
@@ -103,10 +108,11 @@ const Id = ({ posts }) => {
 export async function getServerSideProps(context) {
     const { id, movie_Nm } = context.query;
     // console.log(movie_Nm);
-    let posts = null;
-    let url = null;
-    let code = null;
+   
     try {
+        let posts = null;
+        let url = null;
+        let code = null;
         const data = await axios.get(process.env.NEXT_PUBLIC_MOVIE_URL, {
             params: {
                 identifier: "detail",
