@@ -44,10 +44,10 @@ export default async function handler(req, res) {
         case 'search':
             const movieName = encodeURIComponent(req.query.searchData);
             try {
-                const movieData = await axios.get(`${config.nav_movie.url}?query=${movieName}`, {
+                const movieData = await axios.get(`${config.nav.movie_url}?query=${movieName}`, {
                     headers: {
-                        "X-Naver-Client-Id": config.nav_movie.client_Id,
-                        "X-Naver-Client-Secret": config.nav_movie.client_Pw
+                        "X-Naver-Client-Id": config.nav.client_Id,
+                        "X-Naver-Client-Secret": config.nav.client_Pw
                     }
                 });
                 result = movieData.data;

@@ -21,8 +21,8 @@ const config = {
     movie_detail: {
         detail_url: "http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?",
     },
-    nav_movie: {
-        url: "https://openapi.naver.com/v1/search/movie.json",
+    nav: {
+        movie_url: "https://openapi.naver.com/v1/search/movie.json",
         client_Id: "1pOYLjqzC8aaisNkT_Wt",
         client_Pw: "gVw0D2jlkc",
     }

@@ -79,7 +79,9 @@ const getMoviePoint = async (url, iframeUrl) => {
     const $starReple = $(".score_reple");
     const $$iframeScoreReple = $$(".score_reple");
     const courses = {
+        netizenId: [],
         netizenReple: [],
+        starId: [],
         starReple: [],
     };
 
@@ -94,10 +96,14 @@ const getMoviePoint = async (url, iframeUrl) => {
     });
     $starReple.each((index, node) => {
         const starReples = $(node).find(`p`).text();
+        const starId = $(node).find(`dl`).text().replace(/[\t\n]/g, "");
         courses.starReple.push(starReples);
+        courses.starId.push(starId);
     });
     $$iframeScoreReple.each((index, node) => {
         const netizenReple = $(node).find(`#_filtered_ment_${index}`).text().replace(/[\t\n]/g, "");
+        const netizenId = $(node).find(`dl dt em a`).text().replace(/[\t\n]/g, "");
+        courses.netizenId.push(netizenId)
         courses.netizenReple.push(netizenReple)
     });
 

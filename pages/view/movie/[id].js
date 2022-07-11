@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import axios from 'axios'
 import config from "../../../src/server/config"
 import Image from "next/image"
-import { Avg } from "../../../src/data/Calculator"
+import { getAvg } from "../../../src/data/Calculator"
 
 // style
 import styles from "../../../styles/movie_detail.module.scss";
@@ -12,6 +12,7 @@ import styles from "../../../styles/movie_detail.module.scss";
 //components
 import Loading from "../../../src/components/Loading";
 import Carousel from "../../../src/components/Carousel";
+import CardCarousel from "../../../src/components/CardCarousel";
 import Ychart from "../../../src/components/Ychart";
 import DoughnutChart from "../../../src/components/DoughnutChart";
 
@@ -19,7 +20,7 @@ import DoughnutChart from "../../../src/components/DoughnutChart";
 
 const Id = ({ posts }) => {
     console.log(posts);
-    
+
 
     return <div className={styles.container}>
         {/* 네이버 크롤링 데이터가 있다면? */}
@@ -70,27 +71,31 @@ const Id = ({ posts }) => {
                     <DoughnutChart data={posts.crawlingData.moviePoint} />
                 </div>
             </div>
-            <div style={{display: 'flex', flexDirection: 'row'}}>
-            <div style={{marginTop:"50px",display: 'flex', flexDirection: 'column', alignItems: 'center', width: "50%"}}>
-                <h3 style={{textShadow: '0px 0px 15px #fff'}}>
-                    나이별 평균 만족도
-                </h3>
-                <span>
-                    {Avg(posts.crawlingData.moviePoint.fiftiesScore, posts.crawlingData.moviePoint.fortiesScore, posts.crawlingData.moviePoint.teenagerScore, posts.crawlingData.moviePoint.thirtiesScore,posts.crawlingData.moviePoint.twentiesScore)} / 10
-                </span>
+            <div style={{ display: 'flex', flexDirection: 'row' }}>
+                <div style={{ marginTop: "50px", display: 'flex', flexDirection: 'column', alignItems: 'center', width: "50%" }}>
+                    <h3 style={{ textShadow: '0px 0px 15px #fff' }}>
+                        나이별 평균 만족도
+                    </h3>
+                    <span>
+                        {getAvg(posts.crawlingData.moviePoint.fiftiesScore, posts.crawlingData.moviePoint.fortiesScore, posts.crawlingData.moviePoint.teenagerScore, posts.crawlingData.moviePoint.thirtiesScore, posts.crawlingData.moviePoint.twentiesScore)} / 10
+                    </span>
+                </div>
+                <div style={{ marginTop: "50px", display: 'flex', flexDirection: 'column', alignItems: 'center', width: "50%" }}>
+                    <h3 style={{ textShadow: '0px 0px 15px #fff' }}>
+                        성별 평균 만족도
+                    </h3>
+                    <span>
+                        {getAvg(posts.crawlingData.moviePoint.manScore, posts.crawlingData.moviePoint.womanScore)} / 10
+                    </span>
+                </div>
             </div>
-            <div style={{marginTop:"50px",display: 'flex', flexDirection: 'column', alignItems: 'center', width: "50%"}}>
-                <h3 style={{textShadow: '0px 0px 15px #fff'}}>
-                    성별 평균 만족도
-                </h3>
-                <span>
-                    {Avg(posts.crawlingData.moviePoint.manScore, posts.crawlingData.moviePoint.womanScore )} / 10
-                </span>
+            <div style={{ width: '100%', height: '100%', display: 'flex', justifyContent: 'space-around' }}>
+                <CardCarousel data={posts.crawlingData.moviePoint} identifier={"네티즌"}></CardCarousel>
+                <CardCarousel data={posts.crawlingData.moviePoint} identifier={"기자/평론가"}></CardCarousel>
             </div>
-            
-            </div>
-            
         </div> : <Loading />}
+
+
 
     </div >
 }
